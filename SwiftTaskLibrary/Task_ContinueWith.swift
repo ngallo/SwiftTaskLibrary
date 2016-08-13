@@ -19,13 +19,5 @@ public extension Task {
         addContinuationTask(TaskContinuation(taskScheduler: taskScheduler, cancellationToken: cancellationToken, numberOfRetries: numberOfRetries, taskContinuationOption: taskContinuationOption, taskable: task))
         return task
     }
-    
-    /// Creates a continuation Task<T>.
-    public func continueWith(taskScheduler: TaskScheduler = TaskScheduler.runningContext(), cancellationToken:CancellationToken? = nil, numberOfRetries:Int = 1
-            , taskContinuationOption:TaskContinuationOptions = TaskContinuationOptions.None, task:(Task<T>) throws -> Void) -> Task<Void> {
-        let task = Task<Void>(task: { try task(self) })
-        addContinuationTask(TaskContinuation(taskScheduler: taskScheduler, cancellationToken: cancellationToken, numberOfRetries: numberOfRetries, taskContinuationOption: taskContinuationOption, taskable: task))
-        return task
-    }
 
 }

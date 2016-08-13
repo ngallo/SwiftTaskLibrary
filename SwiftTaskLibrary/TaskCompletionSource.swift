@@ -14,7 +14,7 @@ public class TaskCompletionSource<T> {
     
     private var _task:Task<T>?
     private var _onceToken: dispatch_once_t = 0
-    private var _setResult:((T)->Void)? = nil
+    private var _setResult:((T) -> Void)? = nil
     private var _setError:((error:NSError, errorMessage:String) -> Void)? = nil
     
     //#MARK: Constructors & Destructors

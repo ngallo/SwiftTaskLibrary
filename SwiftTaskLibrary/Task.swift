@@ -192,7 +192,7 @@ public class Task<T> : Taskable {
     }
     
     /// Set the task in started state
-    internal func startSync() -> (setResult:(T)->Void, setError:(error:NSError, errorMessage:String) -> Void) {
+    internal func startSync() -> (setResult:(T)-> Void, setError:(error:NSError, errorMessage:String) -> Void) {
         status = TaskStatus.Running
         return (self.setResult, self.setError)
     }
