@@ -1,4 +1,4 @@
-Create a Task
+2. Create a Task
 -----
 A Task represents an asynchronous operation that is created and started by the means of the TaskFactory class.
 
