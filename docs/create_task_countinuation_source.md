@@ -1,4 +1,4 @@
-3. Create a TaskCompletionSource
+Create a TaskCompletionSource
 -----
 A TaskCompletionSource represents the producer side of a Task unbound to a delegate, providing access to the consumer side through the Task property.
 
