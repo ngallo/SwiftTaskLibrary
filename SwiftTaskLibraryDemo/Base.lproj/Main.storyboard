@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="myq-Pc-iDu">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Sample1 View Controller-->
+        <scene sceneID="4To-DO-A92">
+            <objects>
+                <viewController id="myq-Pc-iDu" customClass="Sample1ViewController" customModule="SwiftTaskLibraryDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="13s-2V-9YI"/>
+                        <viewControllerLayoutGuide type="bottom" id="Bkt-en-dcz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Mdq-E3-fgH">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4dy-pI-chj">
+                                <rect key="frame" x="20" y="20" width="560" height="560"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h4M-gU-aN2">
+                                        <rect key="frame" x="0.0" y="0.0" width="560" height="30"/>
+                                        <color key="backgroundColor" red="0.23521413305605099" green="0.80177649766201187" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="Q9s-Je-9pY"/>
+                                        </constraints>
+                                        <state key="normal" title="Start Task"/>
+                                        <connections>
+                                            <action selector="startTouchUp:" destination="myq-Pc-iDu" eventType="touchUpInside" id="gUl-nk-Olh"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hBw-TH-vu4">
+                                        <rect key="frame" x="0.0" y="40" width="560" height="30"/>
+                                        <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="0Cm-eX-IvL"/>
+                                        </constraints>
+                                        <state key="normal" title="Start Task Completion Source"/>
+                                        <connections>
+                                            <action selector="startTaskCompletionSourceTouchUp:" destination="myq-Pc-iDu" eventType="touchUpInside" id="2kW-tq-cHR"/>
+                                        </connections>
+                                    </button>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7dq-av-8sN">
+                                        <rect key="frame" x="0.0" y="80" width="560" height="480"/>
+                                        <color key="backgroundColor" red="1" green="0.79707943309999996" blue="0.31948742099999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4dy-pI-chj" firstAttribute="top" secondItem="13s-2V-9YI" secondAttribute="bottom" id="bqL-tS-XnH"/>
+                            <constraint firstItem="Bkt-en-dcz" firstAttribute="top" secondItem="4dy-pI-chj" secondAttribute="bottom" constant="20" id="grd-5F-Nfe"/>
+                            <constraint firstItem="4dy-pI-chj" firstAttribute="leading" secondItem="Mdq-E3-fgH" secondAttribute="leadingMargin" id="lAo-kF-g7P"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="4dy-pI-chj" secondAttribute="trailing" id="mqM-hY-CZj"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="_startBtn" destination="h4M-gU-aN2" id="cbz-Ej-4MD"/>
+                        <outlet property="_startBtn2" destination="hBw-TH-vu4" id="Dog-gg-fU1"/>
+                        <outlet property="_textView" destination="7dq-av-8sN" id="tOD-nv-QHD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zof-uz-dy9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="887" y="-31"/>
+        </scene>
+    </scenes>
+    <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+</document>
