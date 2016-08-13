@@ -53,6 +53,7 @@ cTokenSource.task.continueWith(TaskScheduler.ui()) {
     println(task.result ?? "NO RESULT")
 }
 
+//Code that is not using `Task` to create the asynchronus operation
 dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
     println("TaskCompletionSource - Running")
     sleep(5)
@@ -82,7 +83,7 @@ public protocol DataAccessLayer {
 
 In order to use the DataAccessLayer two closures have to passed in input.
 
-Below an exmaple of code which uses the `DAL` and perform an action on the UI thread once the asynchronous operation is completed.
+Below an example of code which uses the `DAL` and perform an action on the UI thread once the asynchronous operation is completed.
 
 **Sample 2 - Usage of the DataAccessLayer**
 ```Swift
