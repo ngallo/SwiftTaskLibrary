@@ -36,28 +36,34 @@ public class Sample1ViewController: UIViewController {
         return "\(result1 ?? "NO RESULT")\n\(result2)"
     }
     
-    private func getResult(taskName:String) -> String {
+    private func getResult(taskName:String) -> String  {
         return "\(self.getCurrentTime()) - \(taskName)"
+    }
+    
+    private func getResultWithToken(token:CancellationToken, taskName:String) throws -> String  {
+        try token.throwIfCancellationRequested()
+        return getResult(taskName)
     }
     
     //#MARK: Operations
 
     @IBAction func startTouchUp(sender: AnyObject) {
+        let nOfRetries = 1
         let cTokenSource = CancellationTokenSource()
         let token = cTokenSource.token
         cTokenSource.cancel()
-        TaskFactory.startAsync(TaskScheduler.background(), cancellationToken: token, numberOfRetries: 2) {
-                return self.getResult("Task1")
+        TaskFactory.startAsync(TaskScheduler.background(), cancellationToken: token, numberOfRetries: nOfRetries) {
+                return try self.getResultWithToken(token, taskName: "Task1")
             }
-            .continueWith(cancellationToken: token, numberOfRetries: 2) {
+            .continueWith(cancellationToken: token, numberOfRetries: nOfRetries, taskContinuationOption: TaskContinuationOptions.OnlyOnRanToCompletion) {
                 [unowned self] task in
                 return try self.concatResult(token, result1:task.result, result2: self.getResult("Task2"))
             }
-            .continueWith(cancellationToken: token, numberOfRetries: 2, taskContinuationOption: TaskContinuationOptions.OnlyOnRanToCompletion) {
+            .continueWith(cancellationToken: token, numberOfRetries: nOfRetries, taskContinuationOption: TaskContinuationOptions.OnlyOnCanceled) {
                 [unowned self] task in
                 return try self.concatResult(token, result1:task.result, result2: self.getResult("Task3"))
             }
-            .continueWith(TaskScheduler.ui(), cancellationToken: token, numberOfRetries: 2) {
+            .continueWith(TaskScheduler.ui(), cancellationToken: token, numberOfRetries: nOfRetries) {
                 [unowned self] task in
                 self._textView.text = task.result ?? "NO RESULT"
         }
@@ -90,8 +96,10 @@ public class Sample1ViewController: UIViewController {
             dispatch_sync(dispatch_get_main_queue(), { () -> Void in
                 self._textView.text = "TaskCompletionSource - Running"
             })
-            sleep(5)
+            sleep(2)
             tcs.setResult(self.getResult("TaskCompletionSource - Completed"))
         }
+        
+        
     }
 }

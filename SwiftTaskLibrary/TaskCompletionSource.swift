@@ -49,7 +49,7 @@ public class TaskCompletionSource<T> {
     }
     
     // Transitions the underlying Task<T> into the Faulted state and binds it to a specified error.
-    public func setResult(error:NSError, errorMessage:String) {
+    public func SetError(error:NSError, errorMessage:String) {
         initialiseTask()
         _setError!(error: error, errorMessage:errorMessage)
     }
