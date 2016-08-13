@@ -1,3 +1,5 @@
+# SwiftTaskLibrary
+
 What is SwiftTaskLibrary
 -----
 
@@ -101,7 +103,7 @@ dal.getOrders({
             () -> Void in
             log(error)
         })
-    },
+})
 ``` 
 
 Using SwiftTaskLibrary the `DAL` code would be implemented as following.
