@@ -9,7 +9,7 @@ Create a `Task`
 -----
 A ``Task`` represents an asynchronous operation that is created and started by the means of the ```TaskFactory``` class.
 
-The `Factory`class implement the following methods:
+The `TaskFactory`class implement the following methods:
 
 *  **`startSync`:** *Starts a `Task` synchronously*
 *  **`startAsync`:** *Starts a `Task` asynchronously*
@@ -64,3 +64,64 @@ dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
 
 Create asynchronous methods
 -----
+Separation of the concerns reduce coupling and increase cohesion of the application.
+
+An example of separation of concerns is the `DAL` (Data Access Layer).
+The `DAL` is a layer which provided simplified access to data stored in persistent storage.
+
+The `DAL` performs IO operations because of that `Api` must be asynchronous.
+
+Below and exmaple of how an `Api` may look like.
+
+**Sample 1 - DataAccessLayer Protocol**
+```Swift
+public protocol DataAccessLayer {
+    func getOrders(success:([Order]) -> Void, failure:(NSError) -> Void))    
+}
+``` 
+
+In order to use the DataAccessLayer two closures have to passed in input.
+
+Below an exmaple of code which uses the `DAL` and perform an action on the UI thread once the asynchronous operation is completed.
+
+**Sample 2 - Usage of the DataAccessLayer**
+```Swift
+let dal = OrdersDataAccessLayer()
+dal.getOrders({
+    orders in 
+        dispatch_sync(dispatch_get_main_queue(), { 
+            () -> Void in
+            update(orders)
+        })
+    },
+    failure: {
+        error in 
+        dispatch_sync(dispatch_get_main_queue(), { 
+            () -> Void in
+            log(error)
+        })
+    },
+``` 
+
+Using SwiftTaskLibrary the `DAL` code would be implemented as following.
+
+**Sample 3 - DataAccessLayer Protocol**
+```Swift
+public protocol DataAccessLayer {
+    func getOrdersAsync() -> Task<[Order]>    
+}
+``` 
+
+**Sample 3 - Usage of the DataAccessLayer**
+```Swift
+let dal = OrdersDataAccessLayer()
+dal.getOrdersAsync()
+    .continueWith(TaskScheduler.ui()) { 
+        task in
+        if (task.isFaulted) {
+            log(task.error)
+            return
+        }
+        update(task.result)
+}
+``` 
