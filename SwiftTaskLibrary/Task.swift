@@ -138,22 +138,22 @@ public class Task<T> : Taskable {
     /// Cancel the current task
     internal func cancelSync() {
         status = .Canceled
-        self.processContinuations()
+        processContinuations()
     }
     
     //#MARK: Methods - Start
     
     private func setResult(result:T) {
         self.result = result
-        self.status = TaskStatus.RanToCompletion
-        self.processContinuations()
+        status = TaskStatus.RanToCompletion
+        processContinuations()
     }
     
     private func setError(error:NSError, errorMessage:String) {
         self.error = error
         self.errorMessage = errorMessage
-        self.status = TaskStatus.Faulted(error)
-        self.processContinuations()
+        status = TaskStatus.Faulted(error)
+        processContinuations()
     }
    
     private func startOperation(retryCounter:Int, numberOfRetries:Int) {
@@ -194,7 +194,7 @@ public class Task<T> : Taskable {
     /// Set the task in started state
     internal func startSync() -> (setResult:(T)-> Void, setError:(error:NSError, errorMessage:String) -> Void) {
         status = TaskStatus.Running
-        return (self.setResult, self.setError)
+        return (setResult, setError)
     }
     
     /// Starts the input task synchronously with a number of retries in case of error.

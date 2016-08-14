@@ -37,7 +37,7 @@ public class Sample1ViewController: UIViewController {
     }
     
     private func getResult(taskName:String) -> String  {
-        return "\(self.getCurrentTime()) - \(taskName)"
+        return "\(getCurrentTime()) - \(taskName)"
     }
     
     private func getResultWithToken(token:CancellationToken, taskName:String) throws -> String  {
@@ -67,7 +67,7 @@ public class Sample1ViewController: UIViewController {
                 [unowned self] task in
                 self._textView.text = task.result ?? "NO RESULT"
         }
-        self._textView.text = ""
+        _textView.text = ""
     }
     
     @IBAction func startTaskCompletionSourceTouchUp(sender: AnyObject) {
