@@ -16,5 +16,8 @@ public enum TaskError: ErrorType {
     
     /// A cencellation task error.
     case Canceled
+    
+    /// A cencellation task error.
+    case NilResult
 
 }

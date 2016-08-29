@@ -225,8 +225,11 @@ public class Task<T> : Taskable {
         }
     }
 
-    /// Gets the result. Use the hasResult property to make sure there is a result.
-    public func getResult() -> T {
-        return result!
+    /// Gets the result.
+    public func getResult() throws -> T {
+        guard let tmpResult = result else {
+            throw TaskError.NilResult
+        }
+        return tmpResult
     }
 }
