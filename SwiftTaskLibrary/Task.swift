@@ -119,7 +119,7 @@ public class Task<T> : Taskable {
                 if hasToRun == false {
                     taskContnuation.taskable.cancelSync()
                 }
-                else if isAsync == true {
+                else if isAsync == false {
                     taskContnuation.taskable.startSync(taskContnuation.taskScheduler, cancellationToken: taskContnuation.cancellationToken, numberOfRetries: taskContnuation.numberOfRetries)
                 }
                 else {
