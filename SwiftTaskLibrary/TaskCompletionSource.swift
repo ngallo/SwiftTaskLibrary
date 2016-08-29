@@ -49,13 +49,13 @@ public class TaskCompletionSource<T> {
     }
     
     // Transitions the underlying Task<T> into the Faulted state and binds it to a specified error.
-    public func SetError(errorMessage:String) {
+    public func setError(errorMessage:String) {
         let nsError = NSError(domain: "SwiftTaskLibrary", code: 0, userInfo: [:])
-        SetError(nsError, errorMessage: errorMessage)
+        setError(nsError, errorMessage: errorMessage)
     }
     
     // Transitions the underlying Task<T> into the Faulted state and binds it to a specified error.
-    public func SetError(error:NSError, errorMessage:String) {
+    public func setError(error:NSError, errorMessage:String) {
         initialiseTask()
         _setError!(error: error, errorMessage:errorMessage)
     }
