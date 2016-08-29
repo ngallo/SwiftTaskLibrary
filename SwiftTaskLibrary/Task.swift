@@ -225,4 +225,8 @@ public class Task<T> : Taskable {
         }
     }
 
+    /// Gets the result. Use the hasResult property to make sure there is a result.
+    public func getResult() -> T {
+        return result!
+    }
 }
