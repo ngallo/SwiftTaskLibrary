@@ -57,7 +57,7 @@ public extension Task {
         return isFaulted && error != nil
     }
     
-    /// Gets whether this Task instance has completed execution due to being canceled.
+    /// Gets whether this Task instance has completed execution.
     public var isTerminated:Bool {
         return isCanceled || isFaulted || isCompleted
     }

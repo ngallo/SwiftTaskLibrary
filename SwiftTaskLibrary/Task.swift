@@ -18,6 +18,7 @@ public class Task<T> : Taskable {
     private var _taskAction:((TaskContext<T>) -> Void)?
     private var _taskContinuationsSyncRoot = NSObject()
     private var _taskContinuations = [TaskContinuation]()
+    private var _taskCompletedCondition: NSCondition = NSCondition()
     
     //#MARK: Constructors & Destructors
     
@@ -68,6 +69,11 @@ public class Task<T> : Taskable {
     public private(set) var result:T? = nil
 
     //#MARK: Methods
+    
+    private func signalTaskCompletedCondition() {
+        self._taskCompletedCondition.signal()
+        self._taskCompletedCondition.broadcast()
+    }
     
     internal func addContinuationTask(taskContinuation:TaskContinuation) {
         task_lock(_taskContinuationsSyncRoot) {
@@ -129,8 +135,29 @@ public class Task<T> : Taskable {
         }
     }
     
+    /// Waits for the Task to completed.
     public func wait() {
-        fatalError("Not implemented yet")
+        if isTerminated == false {
+            _taskCompletedCondition.wait()
+        }
+    }
+    
+    /// Waits for the Task to completed until the input date.
+    public func waitUntilDate(limit: NSDate) -> Bool {
+        if isTerminated == false {
+            return _taskCompletedCondition.waitUntilDate(limit)
+        }
+        return true
+    }
+    
+    /// Throws an exception whether in faulted state
+    public func throwIfFaulted(alternativeErrorMessage:String) throws {
+        if isFaulted == true {
+            if let err = error {
+                throw err
+            }
+            throw TaskError.Unhandled(alternativeErrorMessage)
+        }
     }
     
     //#MARK: Methods - Cancel
@@ -146,6 +173,7 @@ public class Task<T> : Taskable {
     private func setResult(result:T) {
         self.result = result
         status = TaskStatus.RanToCompletion
+        signalTaskCompletedCondition()
         processContinuations()
     }
     
@@ -153,6 +181,7 @@ public class Task<T> : Taskable {
         self.error = error
         self.errorMessage = errorMessage
         status = TaskStatus.Faulted(error)
+        signalTaskCompletedCondition()
         processContinuations()
     }
    
@@ -166,18 +195,20 @@ public class Task<T> : Taskable {
         }
         //Start task
         let context = TaskContext<T>(retryCounter: retryCounter, onSuccess: { [unowned self] result in
-            if let token = self._cancellationToken where token.isCancellationRequested {
-                self.cancelSync()
-            }
-            else {
-                self.setResult(result)
-            }
+                if let token = self._cancellationToken where token.isCancellationRequested {
+                    self.cancelSync()
+                }
+                else {
+                    self.setResult(result)
+                }
+                self.signalTaskCompletedCondition()
             }, onFailure: { [unowned self] error, errorMessage in
                 if let token = self._cancellationToken where token.isCancellationRequested {
                     self.cancelSync()
                 }
                 else if (retryCounter < numberOfRetries) {
                     self.startOperation(retryCounter + 1, numberOfRetries:numberOfRetries)
+                    return
                 }
                 else {
                     if let token = self._cancellationToken where token.isCancellationRequested {
@@ -187,6 +218,7 @@ public class Task<T> : Taskable {
                         self.setError(error, errorMessage: errorMessage)
                     }
                 }
+                self.signalTaskCompletedCondition()
             })
         taskAction(context)
     }

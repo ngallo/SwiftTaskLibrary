@@ -48,6 +48,12 @@ public class Sample1ViewController: UIViewController {
     //#MARK: Operations
 
     @IBAction func startTouchUp(sender: AnyObject) {
+        let task = TaskFactory.startAsync(TaskScheduler.background()) {
+            sleep(5)
+        }
+        task.wait()
+        return
+        
         let nOfRetries = 1
         let cTokenSource = CancellationTokenSource()
         let token = cTokenSource.token
