@@ -71,8 +71,10 @@ public class Task<T> : Taskable {
     //#MARK: Methods
     
     private func signalTaskCompletedCondition() {
+        _taskCompletedCondition.lock()
         self._taskCompletedCondition.signal()
         self._taskCompletedCondition.broadcast()
+        _taskCompletedCondition.unlock()
     }
     
     internal func addContinuationTask(taskContinuation:TaskContinuation) {
@@ -137,9 +139,11 @@ public class Task<T> : Taskable {
     
     /// Waits for the Task to completed.
     public func wait() {
+        _taskCompletedCondition.lock()
         if isTerminated == false {
             _taskCompletedCondition.wait()
         }
+        _taskCompletedCondition.unlock()
     }
     
     /// Waits for the Task to completed until the input date.
