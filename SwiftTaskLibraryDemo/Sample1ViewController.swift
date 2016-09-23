@@ -9,7 +9,7 @@
 import UIKit
 import SwiftTaskLibrary
 
-public class Sample1ViewController: UIViewController {
+open class Sample1ViewController: UIViewController {
 
     //#MARK: Fields
     
@@ -19,35 +19,35 @@ public class Sample1ViewController: UIViewController {
     
     //#MARK: Methods
     
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         _startBtn.layer.cornerRadius = 5.0
         _startBtn2.layer.cornerRadius = 5.0
     }
     
-    private func getCurrentTime() -> String {
-        let formatter = NSDateFormatter()
+    fileprivate func getCurrentTime() -> String {
+        let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm:ss"
-        return formatter.stringFromDate(NSDate())
+        return formatter.string(from: Date())
     }
     
-    private func concatResult(token:CancellationToken, result1:String?, result2:String) throws -> String {
+    fileprivate func concatResult(_ token:CancellationToken, result1:String?, result2:String) throws -> String {
         try token.throwIfCancellationRequested()
         return "\(result1 ?? "NO RESULT")\n\(result2)"
     }
     
-    private func getResult(taskName:String) -> String  {
+    fileprivate func getResult(_ taskName:String) -> String  {
         return "\(getCurrentTime()) - \(taskName)"
     }
     
-    private func getResultWithToken(token:CancellationToken, taskName:String) throws -> String  {
+    fileprivate func getResultWithToken(_ token:CancellationToken, taskName:String) throws -> String  {
         try token.throwIfCancellationRequested()
         return getResult(taskName)
     }
     
     //#MARK: Operations
 
-    @IBAction func startTouchUp(sender: AnyObject) {
+    @IBAction func startTouchUp(_ sender: AnyObject) {
         let task = TaskFactory.startAsync(TaskScheduler.background()) {
             sleep(5)
         }
@@ -61,11 +61,11 @@ public class Sample1ViewController: UIViewController {
         TaskFactory.startAsync(TaskScheduler.background(), cancellationToken: token, numberOfRetries: nOfRetries) {
                 return try self.getResultWithToken(token, taskName: "Task1")
             }
-            .continueWith(cancellationToken: token, numberOfRetries: nOfRetries, taskContinuationOption: TaskContinuationOptions.OnlyOnRanToCompletion) {
+            .continueWith(cancellationToken: token, numberOfRetries: nOfRetries, taskContinuationOption: TaskContinuationOptions.onlyOnRanToCompletion) {
                 [unowned self] task in
                 return try self.concatResult(token, result1:task.result, result2: self.getResult("Task2"))
             }
-            .continueWith(cancellationToken: token, numberOfRetries: nOfRetries, taskContinuationOption: TaskContinuationOptions.OnlyOnCanceled) {
+            .continueWith(cancellationToken: token, numberOfRetries: nOfRetries, taskContinuationOption: TaskContinuationOptions.onlyOnCanceled) {
                 [unowned self] task in
                 return try self.concatResult(token, result1:task.result, result2: self.getResult("Task3"))
             }
@@ -76,7 +76,7 @@ public class Sample1ViewController: UIViewController {
         _textView.text = ""
     }
     
-    @IBAction func startTaskCompletionSourceTouchUp(sender: AnyObject) {
+    @IBAction func startTaskCompletionSourceTouchUp(_ sender: AnyObject) {
         let cTokenSource = CancellationTokenSource()
         let token = cTokenSource.token
         
@@ -86,7 +86,7 @@ public class Sample1ViewController: UIViewController {
                 [unowned self] task in
                 return try self.concatResult(token, result1:task.result, result2: self.getResult("Task2"))
             }
-            .continueWith(cancellationToken: token, numberOfRetries: 2, taskContinuationOption: TaskContinuationOptions.OnlyOnRanToCompletion) {
+            .continueWith(cancellationToken: token, numberOfRetries: 2, taskContinuationOption: TaskContinuationOptions.onlyOnRanToCompletion) {
                 [unowned self] task in
                 return try self.concatResult(token, result1:task.result, result2: self.getResult("Task3"))
             }
@@ -97,9 +97,9 @@ public class Sample1ViewController: UIViewController {
         
         
         //Simulate and async operation dispatched from another framework
-        let backgroundQueue = dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)
-        dispatch_async(backgroundQueue) {
-            dispatch_sync(dispatch_get_main_queue(), { () -> Void in
+        let backgroundQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.background)
+        backgroundQueue.async {
+            DispatchQueue.main.sync(execute: { () -> Void in
                 self._textView.text = "TaskCompletionSource - Running"
             })
             sleep(2)

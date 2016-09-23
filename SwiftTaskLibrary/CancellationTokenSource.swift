@@ -8,16 +8,16 @@
 
 import Foundation
 
-public class CancellationToken {
+public final class CancellationToken {
     
     //#MARK: Fields
     
-    private var _canceled = false
+    fileprivate var _canceled = false
     
     //#MARK: Constructors & Destructors
     
-    private init() {
-        id = NSUUID().UUIDString
+    fileprivate init() {
+        id = UUID().uuidString
     }
 
     //#MARK: Properties
@@ -31,20 +31,20 @@ public class CancellationToken {
     
     //#MARK: Methods
 
-    private func cancel() {
+    fileprivate func cancel() {
         _canceled = true
     }
     
     /// Throws a TaskError.Canceled if this token has had cancellation requested.
     public func throwIfCancellationRequested() throws {
         if _canceled == true  {
-            throw TaskError.Canceled
+            throw TaskError.canceled
         }
     }
     
 }
 
-public class CancellationTokenSource {
+public final class CancellationTokenSource {
     
     //#MARK: Constructors & Destructors
     

@@ -9,7 +9,7 @@
 import Foundation
 
 /// Defines a task continuation description
-internal class TaskContinuation {
+internal final class TaskContinuation {
 
     //#MARK: Constructors & Destructors
     

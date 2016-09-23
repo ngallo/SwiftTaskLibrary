@@ -9,29 +9,29 @@
 import Foundation
 
 /// Represents one or more errors that occur during tasks execution.
-public struct AggregateError : ErrorType {
+public struct AggregateError : Error {
     
     //#MARK: Constructors & Destructors
     
-    private init(innerError:ErrorType, innerErrors:[ErrorType]) {
+    fileprivate init(innerError:Error, innerErrors:[Error]) {
         self.innerError = innerError
         self.innerErrors = innerErrors
     }
     
-    internal init(innerError:ErrorType) {
-        self.init(innerError: innerError, innerErrors: [ErrorType]())
+    internal init(innerError:Error) {
+        self.init(innerError: innerError, innerErrors: [Error]())
     }
 
-    internal init(innerErrors:[ErrorType]) {
-        self.init(innerError: innerErrors.first ?? TaskError.Unhandled("Error"), innerErrors: innerErrors)
+    internal init(innerErrors:[Error]) {
+        self.init(innerError: innerErrors.first ?? TaskError.unhandled("Error"), innerErrors: innerErrors)
     }
 
     //#MARK: Properties
     
     /// Gets the error that caused the current error.
-    public let innerError:ErrorType
+    public let innerError:Error
     
     /// Gets errors that caused the current error.
-    public let innerErrors:[ErrorType]
+    public let innerErrors:[Error]
     
 }
