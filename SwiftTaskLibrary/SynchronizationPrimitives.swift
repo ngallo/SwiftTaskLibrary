@@ -9,21 +9,19 @@
 import Foundation
 
 /// Marks the block as a critical section by obtaining the mutual-exclusion lock for a given object.
-public func task_lock(_ lock: AnyObject, closure: () -> Void) {
+public func task_lock<T>(_ lock: AnyObject, closure: () -> T) -> T {
+    defer {
+        objc_sync_exit(lock)
+    }
     objc_sync_enter(lock)
-    closure()
-    objc_sync_exit(lock)
+    return closure()
 }
 
 /// Marks the block as a critical section by obtaining the mutual-exclusion lock for a given object.
-public func task_trylock(_ lock: AnyObject, closure: () throws -> ()) throws {
+public func task_trylock<T>(_ lock: AnyObject, closure: () throws -> T) throws -> T {
+    defer {
+        objc_sync_exit(lock)
+    }
     objc_sync_enter(lock)
-    do {
-        try closure()
-        objc_sync_exit(lock)
-    }
-    catch let error as NSError {
-        objc_sync_exit(lock)
-        throw error
-    }
+    return try closure()
 }
