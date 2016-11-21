@@ -198,31 +198,31 @@ public final class Task<T> : Taskable {
             return
         }
         //Start task
-        let context = TaskContext<T>(retryCounter: retryCounter, onSuccess: { [unowned self] result in
-                if let token = self._cancellationToken , token.isCancellationRequested {
-                    self.cancelSync()
+        let context = TaskContext<T>(retryCounter: retryCounter, onSuccess: { [weak self] result in guard let this = self else { return }
+                if let token = this._cancellationToken , token.isCancellationRequested {
+                    this.cancelSync()
                 }
                 else {
-                    self.setResult(result)
+                    this.setResult(result)
                 }
-                self.signalTaskCompletedCondition()
-            }, onFailure: { [unowned self] error, errorMessage in
-                if let token = self._cancellationToken , token.isCancellationRequested {
-                    self.cancelSync()
+                this.signalTaskCompletedCondition()
+            }, onFailure: { [weak self] error, errorMessage in guard let this = self else { return }
+                if let token = this._cancellationToken , token.isCancellationRequested {
+                    this.cancelSync()
                 }
                 else if (retryCounter < numberOfRetries) {
-                    self.startOperation(retryCounter + 1, numberOfRetries:numberOfRetries)
+                    this.startOperation(retryCounter + 1, numberOfRetries:numberOfRetries)
                     return
                 }
                 else {
-                    if let token = self._cancellationToken , token.isCancellationRequested {
-                        self.cancelSync()
+                    if let token = this._cancellationToken , token.isCancellationRequested {
+                        this.cancelSync()
                     }
                     else {
-                        self.setError(error, errorMessage: errorMessage)
+                        this.setError(error, errorMessage: errorMessage)
                     }
                 }
-                self.signalTaskCompletedCondition()
+                this.signalTaskCompletedCondition()
             })
         taskAction(context)
     }
