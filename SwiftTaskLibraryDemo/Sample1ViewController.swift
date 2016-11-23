@@ -48,12 +48,6 @@ open class Sample1ViewController: UIViewController {
     //#MARK: Operations
 
     @IBAction func startTouchUp(_ sender: AnyObject) {
-        let task = TaskFactory.startAsync(TaskScheduler.background()) {
-            sleep(5)
-        }
-        task.wait()
-        return
-        
         let nOfRetries = 1
         let cTokenSource = CancellationTokenSource()
         let token = cTokenSource.token
@@ -107,5 +101,15 @@ open class Sample1ViewController: UIViewController {
         }
         
         
+    }
+    
+    @IBAction func startMemoryLeakCheck(_ sender: Any) {
+        TaskFactory.startAsync() { () -> String in 
+            print("OK")
+            return "RESULT"
+            }.continueWith(TaskScheduler.ui()) {
+                [unowned self] task in
+                self._textView.text = task.result ?? "NO RESULT"
+        }
     }
 }

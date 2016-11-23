@@ -42,8 +42,12 @@ public final class Task<T> : Taskable {
         _taskAction = taskAction
     }
     
-    internal convenience init(taskCompletion:TaskCompletionSource<T> ) {
+    internal convenience init(taskCompletion:TaskCompletionSource<T>) {
         self.init()
+    }
+    
+    deinit {
+        print("")
     }
 
     //#MARK: Properties
@@ -125,13 +129,13 @@ public final class Task<T> : Taskable {
                         isAsync = true
                 }
                 if hasToRun == false {
-                    taskContnuation.taskable.cancelSync()
+                    taskContnuation.taskable?.cancelSync()
                 }
                 else if isAsync == false {
-                    taskContnuation.taskable.startSync(taskContnuation.taskScheduler, cancellationToken: taskContnuation.cancellationToken, numberOfRetries: taskContnuation.numberOfRetries)
+                    taskContnuation.taskable?.startSync(taskContnuation.taskScheduler, cancellationToken: taskContnuation.cancellationToken, numberOfRetries: taskContnuation.numberOfRetries)
                 }
                 else {
-                    taskContnuation.taskable.startAsync(taskContnuation.taskScheduler, cancellationToken: taskContnuation.cancellationToken, numberOfRetries: taskContnuation.numberOfRetries)
+                    taskContnuation.taskable?.startAsync(taskContnuation.taskScheduler, cancellationToken: taskContnuation.cancellationToken, numberOfRetries: taskContnuation.numberOfRetries)
                 }
             }
         }

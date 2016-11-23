@@ -21,6 +21,8 @@ public final class TaskCompletionSource<T> {
     //#MARK: Constructors & Destructors
     
     public init() {
+        
+        print("OK")
     }
     
     //#MARK: Properties

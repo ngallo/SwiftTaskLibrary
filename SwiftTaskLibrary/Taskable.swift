@@ -8,7 +8,7 @@
 
 import Foundation
 
-internal protocol Taskable {
+internal protocol Taskable : class {
     
     //#MARK: Properties
     

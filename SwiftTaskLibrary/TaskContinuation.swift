@@ -21,13 +21,17 @@ internal final class TaskContinuation {
         self.taskable = taskable
     }
     
+    deinit {
+        print("")
+    }
+    
     //#MARK: Properties
     
     internal let taskScheduler:TaskScheduler
     internal let cancellationToken:CancellationToken?
     internal let numberOfRetries:Int
     internal let taskContinuationOption:TaskContinuationOptions
-    internal let taskable:Taskable
+    internal weak var taskable:Taskable?
     internal var isStarted:Bool = false
     
 }
