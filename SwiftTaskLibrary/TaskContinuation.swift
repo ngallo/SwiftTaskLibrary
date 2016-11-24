@@ -21,10 +21,6 @@ internal final class TaskContinuation {
         self.taskable = taskable
     }
     
-    deinit {
-        print("")
-    }
-    
     //#MARK: Properties
     
     internal let taskScheduler:TaskScheduler

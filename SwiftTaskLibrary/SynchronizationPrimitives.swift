@@ -9,6 +9,7 @@
 import Foundation
 
 /// Marks the block as a critical section by obtaining the mutual-exclusion lock for a given object.
+@discardableResult
 public func task_lock<T>(_ lock: AnyObject, closure: () -> T) -> T {
     defer {
         objc_sync_exit(lock)
@@ -18,6 +19,7 @@ public func task_lock<T>(_ lock: AnyObject, closure: () -> T) -> T {
 }
 
 /// Marks the block as a critical section by obtaining the mutual-exclusion lock for a given object.
+@discardableResult
 public func task_trylock<T>(_ lock: AnyObject, closure: () throws -> T) throws -> T {
     defer {
         objc_sync_exit(lock)

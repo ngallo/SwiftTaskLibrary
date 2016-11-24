@@ -29,6 +29,7 @@
 		60DD6F111D1C96FE00D5916C /* TaskContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DD6F101D1C96FE00D5916C /* TaskContext.swift */; };
 		60DD6F131D1C9E5300D5916C /* Task_ContinueWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DD6F121D1C9E5300D5916C /* Task_ContinueWith.swift */; };
 		60DD6F151D1C9FDE00D5916C /* Task_Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DD6F141D1C9FDE00D5916C /* Task_Status.swift */; };
+		60E24DD11DE781B30025E240 /* TaskRefCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E24DD01DE781B30025E240 /* TaskRefCounter.swift */; };
 		60E3CB5A1D2060E4002E018C /* Taskable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E3CB591D2060E4002E018C /* Taskable.swift */; };
 		60E3CB5C1D2065AE002E018C /* TaskContinuation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E3CB5B1D2065AE002E018C /* TaskContinuation.swift */; };
 		60FF7D411D29BBDE00830F9D /* CancellationTokenSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FF7D401D29BBDE00830F9D /* CancellationTokenSource.swift */; };
@@ -91,6 +92,7 @@
 		60DD6F101D1C96FE00D5916C /* TaskContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskContext.swift; sourceTree = "<group>"; };
 		60DD6F121D1C9E5300D5916C /* Task_ContinueWith.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task_ContinueWith.swift; sourceTree = "<group>"; };
 		60DD6F141D1C9FDE00D5916C /* Task_Status.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task_Status.swift; sourceTree = "<group>"; };
+		60E24DD01DE781B30025E240 /* TaskRefCounter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskRefCounter.swift; sourceTree = "<group>"; };
 		60E3CB591D2060E4002E018C /* Taskable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Taskable.swift; sourceTree = "<group>"; };
 		60E3CB5B1D2065AE002E018C /* TaskContinuation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskContinuation.swift; sourceTree = "<group>"; };
 		60FF7D401D29BBDE00830F9D /* CancellationTokenSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CancellationTokenSource.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				60B84A091D16C8500018AD36 /* Task.swift */,
 				6068ED1C1D5BAF820061C707 /* TaskCompletionSource.swift */,
 				60B84A111D16D0590018AD36 /* TaskFactory.swift */,
+				60E24DD01DE781B30025E240 /* TaskRefCounter.swift */,
 			);
 			path = SwiftTaskLibrary;
 			sourceTree = "<group>";
@@ -365,6 +368,7 @@
 				602E71EA1D172909006602E6 /* TaskError.swift in Sources */,
 				609E78221D19F86C004ACB60 /* TaskContinuationOptions.swift in Sources */,
 				60FF7D411D29BBDE00830F9D /* CancellationTokenSource.swift in Sources */,
+				60E24DD11DE781B30025E240 /* TaskRefCounter.swift in Sources */,
 				602E72091D17617F006602E6 /* TaskScheduler.swift in Sources */,
 				6068ED1D1D5BAF820061C707 /* TaskCompletionSource.swift in Sources */,
 				60DD6F131D1C9E5300D5916C /* Task_ContinueWith.swift in Sources */,

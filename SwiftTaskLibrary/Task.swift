@@ -26,6 +26,7 @@ public final class Task<T> : Taskable {
         id = UUID().uuidString
         _cancellationToken = nil
         status = TaskStatus.created
+        TaskRefCounter.register(task: self)
     }
    
     internal convenience init(task:@escaping () throws -> T) {
@@ -45,10 +46,6 @@ public final class Task<T> : Taskable {
     internal convenience init(taskCompletion:TaskCompletionSource<T>) {
         self.init()
     }
-    
-    deinit {
-        print("")
-    }
 
     //#MARK: Properties
     
@@ -62,7 +59,13 @@ public final class Task<T> : Taskable {
     public fileprivate(set) var errorMessage:String = ""
     
     /// Gets the TaskStatus of this task.
-    public fileprivate(set) var status:TaskStatus
+    public fileprivate(set) var status:TaskStatus {
+        didSet {
+            if isTerminated == true {
+                TaskRefCounter.unregister(task: self)
+            }
+        }
+    }
 
     /// Gets whether this Task has a result.
     public var hasResult:Bool {
@@ -232,6 +235,7 @@ public final class Task<T> : Taskable {
     }
     
     /// Set the task in started state
+    @discardableResult
     internal func startSync() -> (setResult:(T)-> Void, setError:(_ error:NSError, _ errorMessage:String) -> Void) {
         status = TaskStatus.running
         return (setResult, setError)
