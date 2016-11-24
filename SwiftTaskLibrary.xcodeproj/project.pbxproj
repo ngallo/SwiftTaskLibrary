@@ -29,6 +29,7 @@
 		60DD6F111D1C96FE00D5916C /* TaskContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DD6F101D1C96FE00D5916C /* TaskContext.swift */; };
 		60DD6F131D1C9E5300D5916C /* Task_ContinueWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DD6F121D1C9E5300D5916C /* Task_ContinueWith.swift */; };
 		60DD6F151D1C9FDE00D5916C /* Task_Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DD6F141D1C9FDE00D5916C /* Task_Status.swift */; };
+		60E24DD11DE781B30025E240 /* TaskRefCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E24DD01DE781B30025E240 /* TaskRefCounter.swift */; };
 		60E3CB5A1D2060E4002E018C /* Taskable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E3CB591D2060E4002E018C /* Taskable.swift */; };
 		60E3CB5C1D2065AE002E018C /* TaskContinuation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E3CB5B1D2065AE002E018C /* TaskContinuation.swift */; };
 		60FF7D411D29BBDE00830F9D /* CancellationTokenSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FF7D401D29BBDE00830F9D /* CancellationTokenSource.swift */; };
@@ -91,6 +92,7 @@
 		60DD6F101D1C96FE00D5916C /* TaskContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskContext.swift; sourceTree = "<group>"; };
 		60DD6F121D1C9E5300D5916C /* Task_ContinueWith.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task_ContinueWith.swift; sourceTree = "<group>"; };
 		60DD6F141D1C9FDE00D5916C /* Task_Status.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task_Status.swift; sourceTree = "<group>"; };
+		60E24DD01DE781B30025E240 /* TaskRefCounter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskRefCounter.swift; sourceTree = "<group>"; };
 		60E3CB591D2060E4002E018C /* Taskable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Taskable.swift; sourceTree = "<group>"; };
 		60E3CB5B1D2065AE002E018C /* TaskContinuation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskContinuation.swift; sourceTree = "<group>"; };
 		60FF7D401D29BBDE00830F9D /* CancellationTokenSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CancellationTokenSource.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				60B84A091D16C8500018AD36 /* Task.swift */,
 				6068ED1C1D5BAF820061C707 /* TaskCompletionSource.swift */,
 				60B84A111D16D0590018AD36 /* TaskFactory.swift */,
+				60E24DD01DE781B30025E240 /* TaskRefCounter.swift */,
 			);
 			path = SwiftTaskLibrary;
 			sourceTree = "<group>";
@@ -281,17 +284,20 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Nicola Gallo";
 				TargetAttributes = {
 					602E71F01D174623006602E6 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 					603EC5EE1D15DB080005426E = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 					603EC5F81D15DB080005426E = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -362,6 +368,7 @@
 				602E71EA1D172909006602E6 /* TaskError.swift in Sources */,
 				609E78221D19F86C004ACB60 /* TaskContinuationOptions.swift in Sources */,
 				60FF7D411D29BBDE00830F9D /* CancellationTokenSource.swift in Sources */,
+				60E24DD11DE781B30025E240 /* TaskRefCounter.swift in Sources */,
 				602E72091D17617F006602E6 /* TaskScheduler.swift in Sources */,
 				6068ED1D1D5BAF820061C707 /* TaskCompletionSource.swift in Sources */,
 				60DD6F131D1C9E5300D5916C /* Task_ContinueWith.swift in Sources */,
@@ -420,24 +427,26 @@
 		602E72011D174623006602E6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = SwiftTaskLibraryDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = it.ngallo.SwiftTaskLibraryDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		602E72021D174623006602E6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = SwiftTaskLibraryDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = it.ngallo.SwiftTaskLibraryDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -455,8 +464,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -504,8 +515,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -525,6 +538,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -536,6 +550,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -547,6 +562,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -554,6 +570,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -564,6 +581,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = it.ngallo.SwiftTaskLibrary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -574,6 +592,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = it.ngallo.SwiftTaskLibraryTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -584,6 +603,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = it.ngallo.SwiftTaskLibraryTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

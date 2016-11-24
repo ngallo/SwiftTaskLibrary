@@ -11,19 +11,19 @@ import Foundation
 //#MARK: Type aliases
 
 /// Task queue.
-public typealias TaskQueue = dispatch_queue_t
+public typealias TaskQueue = DispatchQueue
 
 /// Represents a Task scheduler.
-public class TaskScheduler {
+public final class TaskScheduler {
     
     //#MARK: Fields
     
     /// Gets the task queue.
-    private let _taskQueue:TaskQueue?
+    fileprivate let _taskQueue:TaskQueue?
     
     //#MARK: Constructors & Destructors
 
-    private init(taskQueue:TaskQueue?) {
+    fileprivate init(taskQueue:TaskQueue?) {
         _taskQueue = taskQueue
     }
     
@@ -32,31 +32,32 @@ public class TaskScheduler {
     /// The user interactive class represents tasks that need to be done immediately in order to provide a nice user experience.
     /// Use it for UI updates, event handling and small workloads that require low latency.
     /// The total amount of work done in this class during the execution of your app should be small.
-    internal static var globalUserInteractiveQueue: TaskQueue {
-        return dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.rawValue), 0)
+    public static var globalUserInteractiveQueue: TaskQueue {
+        return DispatchQueue.global(qos:.userInteractive)
     }
     
     /// The user initiated class represents tasks that are initiated from the UI and can be performed asynchronously.
     /// It should be used when the user is waiting for immediate results, and for tasks required to continue user interaction.
-    internal static var globalUserInitiatedQueue: TaskQueue {
-        return dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.rawValue), 0)
+    public static var globalUserInitiatedQueue: TaskQueue {
+        return DispatchQueue.global(qos:.userInitiated)
     }
     
     /// The utility class represents long-running tasks, typically with a user-visible progress indicator.
     /// Use it for computations, I/O, networking, continous data feeds and similar tasks. This class is designed to be energy efficient.
-    internal static var globalUtilityQueue: TaskQueue {
-        return dispatch_get_global_queue(Int(QOS_CLASS_UTILITY.rawValue), 0)
+    public static var globalUtilityQueue: TaskQueue {
+        return DispatchQueue.global(qos:.utility)
+
     }
     
     /// The background class represents tasks that the user is not directly aware of.
     /// Use it for prefetching, maintenance, and other tasks that don’t require user interaction and aren’t time-sensitive.
-    internal static var globalBackgroundQueue: TaskQueue {
-        return dispatch_get_global_queue(Int(QOS_CLASS_BACKGROUND.rawValue), 0)
+    public static var globalBackgroundQueue: TaskQueue {
+        return DispatchQueue.global(qos:.background)
     }
     
     /// The global main queue represents tasks that need to be ran on the main UI thread.
-    internal static var globalMainQueue: TaskQueue {
-        return dispatch_get_main_queue()
+    public static var globalMainQueue: TaskQueue {
+        return DispatchQueue.main
     }
     
     //#MARK: Methods
@@ -92,7 +93,7 @@ public class TaskScheduler {
     }
     
     /// Gets the task scheduler for a custom queue
-    public static func queueContext(taskQueue:TaskQueue) -> TaskScheduler {
+    public static func queueContext(_ taskQueue:TaskQueue) -> TaskScheduler {
         return TaskScheduler(taskQueue: taskQueue)
     }
     

@@ -9,16 +9,16 @@
 import Foundation
 
 /// Represents a Task<T> execution context.
-internal class TaskContext<T> {
+internal final class TaskContext<T> {
     
     //#MARK: Fields
     
-    private let _onSuccess:(T) -> Void
-    private let _onFailure:(NSError, String) -> Void
+    fileprivate let _onSuccess:(T) -> Void
+    fileprivate let _onFailure:(NSError, String) -> Void
     
     //#MARK: Constructors & Destructors
     
-    internal init(retryCounter:Int, onSuccess:(T) -> Void, onFailure:(NSError, String) -> Void) {
+    internal init(retryCounter:Int, onSuccess:@escaping (T) -> Void, onFailure:@escaping (NSError, String) -> Void) {
         self.retryCounter = retryCounter
         _onSuccess = onSuccess
         _onFailure = onFailure
@@ -32,12 +32,12 @@ internal class TaskContext<T> {
     //#MARK: Methods
     
     /// Sets the task in a completed state and assign the result.
-    internal func setResult(result:T) {
+    internal func setResult(_ result:T) {
         _onSuccess(result)
     }
     
     /// Sets the task in a faulted state.
-    internal func setError(error:NSError, errorMessage:String) {
+    internal func setError(_ error:NSError, errorMessage:String) {
         _onFailure(error, errorMessage)
     }
     

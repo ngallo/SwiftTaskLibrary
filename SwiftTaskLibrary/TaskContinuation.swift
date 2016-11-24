@@ -9,7 +9,7 @@
 import Foundation
 
 /// Defines a task continuation description
-internal class TaskContinuation {
+internal final class TaskContinuation {
 
     //#MARK: Constructors & Destructors
     
@@ -27,7 +27,7 @@ internal class TaskContinuation {
     internal let cancellationToken:CancellationToken?
     internal let numberOfRetries:Int
     internal let taskContinuationOption:TaskContinuationOptions
-    internal let taskable:Taskable
+    internal weak var taskable:Taskable?
     internal var isStarted:Bool = false
     
 }

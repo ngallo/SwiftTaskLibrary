@@ -13,8 +13,9 @@ public extension Task {
     //#MARK: Methods - Continue With Task<T>
     
     /// Creates a continuation Task<T>.
-    public func continueWith<T1>(taskScheduler: TaskScheduler = TaskScheduler.runningContext(), cancellationToken:CancellationToken? = nil, numberOfRetries:Int = 1
-            , taskContinuationOption:TaskContinuationOptions = TaskContinuationOptions.None, task:(Task<T>) throws -> T1) -> Task<T1> {
+    @discardableResult
+    public func continueWith<T1>(_ taskScheduler: TaskScheduler = TaskScheduler.runningContext(), cancellationToken:CancellationToken? = nil, numberOfRetries:Int = 1
+            , taskContinuationOption:TaskContinuationOptions = TaskContinuationOptions.none, task:@escaping (Task<T>) throws -> T1) -> Task<T1> {
         let task = Task<T1>(task: { return try task(self) })
         addContinuationTask(TaskContinuation(taskScheduler: taskScheduler, cancellationToken: cancellationToken, numberOfRetries: numberOfRetries, taskContinuationOption: taskContinuationOption, taskable: task))
         return task

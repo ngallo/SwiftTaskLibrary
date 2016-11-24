@@ -15,7 +15,7 @@ public extension Task {
     /// Gets whether this Task instance has completed execution due to being canceled.
     public var isCanceled:Bool {
         switch status {
-        case .Canceled:
+        case .canceled:
             return true
         default:
             return false
@@ -25,7 +25,7 @@ public extension Task {
     /// Gets whether this Task is in a faulted state.
     public var isFaulted:Bool {
         switch status {
-        case .Faulted:
+        case .faulted:
             return true
         default:
             return false
@@ -35,7 +35,7 @@ public extension Task {
     /// Gets whether this Task is running.
     public var isRunning:Bool {
         switch status {
-        case .Running:
+        case .running:
             return true
         default:
             return false
@@ -45,7 +45,7 @@ public extension Task {
     /// Gets whether this Task has completed.
     public var isCompleted:Bool {
         switch status {
-        case .RanToCompletion:
+        case .ranToCompletion:
             return true
         default:
             return false
@@ -57,7 +57,7 @@ public extension Task {
         return isFaulted && error != nil
     }
     
-    /// Gets whether this Task instance has completed execution due to being canceled.
+    /// Gets whether this Task instance has completed execution.
     public var isTerminated:Bool {
         return isCanceled || isFaulted || isCompleted
     }

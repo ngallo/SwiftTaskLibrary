@@ -11,22 +11,22 @@ import Foundation
 public enum TaskContinuationOptions {
 
     /// When no continuation options are specified, specifies that default behavior should be used when executing a continuation.
-    case None
+    case none
     /// Specifies that the continuation task should be executed synchronously.
-    case ExecuteSynchronously
+    case executeSynchronously
     /// Specifies that the continuation task should not be scheduled if its antecedent was canceled.
-    case NotOnCanceled
+    case notOnCanceled
     /// Specifies that the continuation task should not be scheduled if its antecedent threw an unhandled exception.
-    case NotOnFaulted
+    case notOnFaulted
     /// Specifies that the continuation task should not be scheduled if its antecedent ran to completion.
-    case NotOnRanToCompletion
+    case notOnRanToCompletion
     /// Specifies that the continuation should be scheduled only if its antecedent was canceled.
-    case OnlyOnCanceled
+    case onlyOnCanceled
     /// Specifies that the continuation task should be scheduled only if its antecedent threw an unhandled exception. .
-    case OnlyOnFaulted
+    case onlyOnFaulted
     /// Specifies that the continuation should be scheduled only if its antecedent ran to completion..
-    case OnlyOnRanToCompletion
+    case onlyOnRanToCompletion
     /// Specifies that the continuation task should be run asynchronously.
-    case RunContinuationsAsynchronously
+    case runContinuationsAsynchronously
     
 }

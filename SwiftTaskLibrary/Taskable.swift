@@ -8,18 +8,18 @@
 
 import Foundation
 
-internal protocol Taskable {
+internal protocol Taskable : class {
     
     //#MARK: Properties
-    
-    var id:String { get }
 
+    var refCounterActive:Bool { get }
+    var id:String { get }
 
     //#MARK: Methods
 
     func cancelSync()
-    func startSync(taskScheduler:TaskScheduler, cancellationToken:CancellationToken?, numberOfRetries:Int)
-    func startAsync(taskScheduler:TaskScheduler, cancellationToken:CancellationToken?, numberOfRetries:Int)
-    func startAfter(numberMs:Double, taskScheduler:TaskScheduler, cancellationToken:CancellationToken?, numberOfRetries:Int)
+    func startSync(_ taskScheduler:TaskScheduler, cancellationToken:CancellationToken?, numberOfRetries:Int)
+    func startAsync(_ taskScheduler:TaskScheduler, cancellationToken:CancellationToken?, numberOfRetries:Int)
+    func startAfter(_ numberMs:Double, taskScheduler:TaskScheduler, cancellationToken:CancellationToken?, numberOfRetries:Int)
     
 }

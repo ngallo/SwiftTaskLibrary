@@ -12,14 +12,14 @@ import Foundation
 public enum TaskStatus {
     
     /// The task has been initialized but has not yet been started.
-    case Created
+    case created
     /// The task has been started but has been canceled.
-    case Canceled
+    case canceled
     /// The task completed due to an unhandled error.
-    case Faulted(ErrorType)
+    case faulted(Error)
     /// The task is running but has not yet completed.
-    case Running
+    case running
     /// The task completed execution successfully.
-    case RanToCompletion
+    case ranToCompletion
 
 }

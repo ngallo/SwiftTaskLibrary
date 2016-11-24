@@ -9,12 +9,15 @@
 import Foundation
 
 /// Defines a Task's error.
-public enum TaskError: ErrorType {
+public enum TaskError: Error {
     
     /// A generic task error.
-    case Unhandled(String)
+    case unhandled(String)
     
     /// A cencellation task error.
-    case Canceled
+    case canceled
+    
+    /// A cencellation task error.
+    case nilResult
 
 }
