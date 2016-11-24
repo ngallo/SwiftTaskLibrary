@@ -11,9 +11,9 @@ import Foundation
 internal protocol Taskable : class {
     
     //#MARK: Properties
-    
-    var id:String { get }
 
+    var refCounterActive:Bool { get }
+    var id:String { get }
 
     //#MARK: Methods
 

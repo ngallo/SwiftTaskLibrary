@@ -18,7 +18,7 @@ internal class TaskRefCounter {
 
     //#MARK: Methods
 
-    internal static func register(task:Taskable) {
+    internal static func reference(task:Taskable) {
         task_lock(_syncRoot) {
             if self._tasksMap[task.id] == nil {
                 self._tasksMap[task.id] = task
@@ -26,9 +26,14 @@ internal class TaskRefCounter {
         }
     }
     
-    internal static func unregister(task:Taskable) {
+    internal static func signalTermination() {
         task_lock(_syncRoot) {
-            self._tasksMap.removeValue(forKey: task.id)
+            let values = _tasksMap.values
+            for value in values {
+                if (value.refCounterActive ==  false) {
+                    _tasksMap.removeValue(forKey: value.id)
+                }
+            }
         }
     }
     

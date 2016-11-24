@@ -26,7 +26,7 @@ public final class Task<T> : Taskable {
         id = UUID().uuidString
         _cancellationToken = nil
         status = TaskStatus.created
-        TaskRefCounter.register(task: self)
+        TaskRefCounter.reference(task: self)
     }
    
     internal convenience init(task:@escaping () throws -> T) {
@@ -48,6 +48,25 @@ public final class Task<T> : Taskable {
     }
 
     //#MARK: Properties
+
+    /// Gets true if the ref counter has to be active, false otherwise.
+    internal var refCounterActive:Bool {
+        get {
+            var isActive = true
+            if isTerminated == true {
+                isActive = false
+                task_lock(_taskContinuationsSyncRoot) {
+                    for taskContinuation in self._taskContinuations {
+                        if taskContinuation.taskable?.refCounterActive == true {
+                            isActive = true
+                            break
+                        }
+                    }
+                }
+            }
+            return isActive
+        }
+    }
     
     /// Gets an ID for this Task instance.
     public let id:String
@@ -62,7 +81,7 @@ public final class Task<T> : Taskable {
     public fileprivate(set) var status:TaskStatus {
         didSet {
             if isTerminated == true {
-                TaskRefCounter.unregister(task: self)
+                TaskRefCounter.signalTermination()
             }
         }
     }
