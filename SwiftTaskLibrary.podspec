@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SwiftTaskLibrary"
-  s.version      = "2.0.4"
+  s.version      = "2.0.5"
   s.summary      = "A Swift porting of the .net TPL."
 
   # This description is used to generate tags and improve search results.
@@ -81,7 +81,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source = { :git => "https://github.com/ngallo/SwiftTaskLibrary", :tag => "2.0.4" }
+  s.source = { :git => "https://github.com/ngallo/SwiftTaskLibrary.git", :tag => "2.0.5" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
