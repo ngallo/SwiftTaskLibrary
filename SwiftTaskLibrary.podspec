@@ -16,8 +16,8 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SwiftTaskLibrary"
-  s.version      = "1.0.0"
-  s.summary      = "A Swift Task Library"
+  s.version      = "2.0.0"
+  s.summary      = "A Swift porting of the .net TPL. The purpose of the TPL is to make developers more productive by simplifying the process of adding parallelism and concurrency to applications."
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -25,9 +25,9 @@ Pod::Spec.new do |s|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description  = <<-DESC
-    Swift task library implemented on the top of the Grand Central Dispatch.
-    A task can be executed either synchronously or asynchronously, as well as this, the library  provides a retrying mechanism for sync & async operations.
-                   DESC
+    SwiftTaskLibrary is a Swift porting of the .net TPL. The purpose of the TPL is to make developers more productive by simplifying the process of adding parallelism and concurrency to applications.
+    It is implemented on the top of the Grand Central Dispatch. A task can be executed either synchronously or asynchronously, as well as this, the library  provides a retrying mechanism for sync & async operations.
+  DESC
 
   s.homepage     = "https://github.com/SwiftGCDPack/SwiftTaskLibrary"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
@@ -81,7 +81,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source = { :git => "https://github.com/SwiftGCDPack/SwiftTaskLibrary.git", :tag => "1.0.0" }
+  s.source = { :git => "https://github.com/SwiftGCDPack/SwiftTaskLibrary.git", :tag => "2.0.0" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
