@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SwiftTaskLibrary"
-  s.version      = "2.0.2"
+  s.version      = "2.0.3"
   s.summary      = "A Swift porting of the .net TPL."
 
   # This description is used to generate tags and improve search results.
@@ -55,9 +55,9 @@ Pod::Spec.new do |s|
   #
 
   s.author             = { "Nicola Gallo" => "nicolagmt@hotmail.com" }
-  # Or just: s.author    = "SwiftGCDPack"
-  # s.authors            = { "SwiftGCDPack" => "email@address.com" }
-  # s.social_media_url   = "http://twitter.com/SwiftGCDPack"
+  # Or just: s.author    = "SwiftTaskLibrary"
+  # s.authors            = { "SwiftTaskLibrary" => "email@address.com" }
+  # s.social_media_url   = "http://twitter.com/SwiftTaskLibrary"
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -81,7 +81,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source = { :git => "https://github.com/SwiftGCDPack/SwiftTaskLibrary.git", :tag => "2.0.2" }
+  s.source = { :git => "https://github.com/SwiftTaskLibrary.git", :tag => "2.0.3" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
