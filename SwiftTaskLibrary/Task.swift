@@ -77,6 +77,20 @@ public final class Task<T> : Taskable {
     /// Gets the error message.
     public fileprivate(set) var errorMessage:String = ""
     
+    /// Gets the error message description.
+    public var errorDescription:String {
+        get {
+            var errorMsgDec = ""
+            if errorMessage.characters.count > 0 {
+                errorMsgDec = "ErrorMessage:\(errorMessage)"
+            }
+            if error != nil {
+                errorMsgDec = "\(errorMsgDec); Error:\(error)"
+            }
+            return errorMsgDec
+        }
+    }
+    
     /// Gets the TaskStatus of this task.
     public fileprivate(set) var status:TaskStatus {
         didSet {
@@ -295,4 +309,5 @@ public final class Task<T> : Taskable {
         }
         return tmpResult
     }
+    
 }
