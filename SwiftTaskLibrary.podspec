@@ -16,8 +16,8 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SwiftTaskLibrary"
-  s.version      = "2.0.0"
-  s.summary      = "A Swift porting of the .net TPL. The purpose of the TPL is to make developers more productive by simplifying the process of adding parallelism and concurrency to applications."
+  s.version      = "2.0.1"
+  s.summary      = "A Swift porting of the .net TPL."
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -29,7 +29,7 @@ Pod::Spec.new do |s|
     It is implemented on the top of the Grand Central Dispatch. A task can be executed either synchronously or asynchronously, as well as this, the library  provides a retrying mechanism for sync & async operations.
   DESC
 
-  s.homepage     = "https://github.com/SwiftGCDPack/SwiftTaskLibrary"
+  s.homepage     = "https://github.com/ngallo/SwiftTaskLibrary"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
