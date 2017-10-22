@@ -1,3 +1,5 @@
+[![Documentation Status](http://readthedocs.org/projects/swifttasklibrary/badge/?version=latest)](http://swifttasklibrary.readthedocs.io/en/latest/?badge=latest)
+
 # SwiftTaskLibrary
 
 What is SwiftTaskLibrary
